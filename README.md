@@ -2,7 +2,17 @@
 
 ## 📋 Visão Geral
 
-Landing page institucional desenvolvida com **Next.js 14+**, utilizando **App Router**, **TypeScript** e **Tailwind CSS**. Estruturada para alta performance, SEO otimizado e design responsivo.
+Landing page institucional desenvolvida com **Next.js 15+**, utilizando **App Router**, **TypeScript** e **Tailwind CSS v4**. Agora com animações modernas (Framer Motion), tema claro/escuro e microinterações.
+
+---
+
+## ✨ Novidades (Nov/2025)
+
+- Tema claro/escuro com preferência persistente (`ThemeToggle`).
+- Animações de entrada suaves com `AnimatedSection` (Framer Motion).
+- Carrossel da equipe com autoplay, pausa no hover e ARIA melhorado.
+- Header com efeito glassmorphism e blobs decorativos no Hero.
+- Utilitários e keyframes globais: `glass`, `floating`, `focus-ring`.
 
 ---
 

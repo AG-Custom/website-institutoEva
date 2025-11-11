@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface TeamMember {
   name: string;
@@ -59,52 +60,53 @@ const teamMembers: TeamMember[] = [
 ];
 
 export default function TeamCarousel() {
-  // Índice inicial centralizado para permitir navegação para ambos os lados
-  const startIndex = teamMembers.length;
-  const [currentIndex, setCurrentIndex] = useState(startIndex);
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [index, setIndex] = useState(0);
+  const [direction, setDirection] = useState<"next" | "prev">("next");
+  const [isHovered, setIsHovered] = useState(false);
+  const timerRef = useRef<number | null>(null);
 
-  // Duplicar os cards para efeito infinito
-  const extendedMembers = [...teamMembers, ...teamMembers, ...teamMembers];
+  const safeIndex = (i: number) => (i + teamMembers.length) % teamMembers.length;
 
   const handlePrev = () => {
-    if (isTransitioning) return;
-    setIsTransitioning(true);
-    setCurrentIndex((prev) => prev - 1);
+    setDirection("prev");
+    setIndex((i) => safeIndex(i - 1));
   };
 
   const handleNext = () => {
-    if (isTransitioning) return;
-    setIsTransitioning(true);
-    setCurrentIndex((prev) => prev + 1);
+    setDirection("next");
+    setIndex((i) => safeIndex(i + 1));
   };
 
+  // Autoplay com pausa no hover
   useEffect(() => {
-    if (!isTransitioning) return;
+    if (isHovered) {
+      if (timerRef.current) window.clearInterval(timerRef.current);
+      return;
+    }
+    timerRef.current = window.setInterval(() => {
+      setDirection("next");
+      setIndex((i) => safeIndex(i + 1));
+    }, 4000);
+    return () => {
+      if (timerRef.current) window.clearInterval(timerRef.current);
+    };
+  }, [isHovered]);
 
-    const timer = setTimeout(() => {
-      setIsTransitioning(false);
-      
-      if (currentIndex >= startIndex + teamMembers.length) {
-        setCurrentIndex(startIndex);
-      } else if (currentIndex < startIndex) {
-        setCurrentIndex(startIndex + teamMembers.length - 1);
-      }
-    }, 500);
-
-    return () => clearTimeout(timer);
-  }, [currentIndex, isTransitioning, startIndex]);
-
-  const getVisibleCards = () => {
-    const len = extendedMembers.length;
-    // Indexação circular para evitar undefined nos extremos
-    const prev = extendedMembers[(currentIndex - 1 + len) % len];
-    const curr = extendedMembers[(currentIndex + len) % len];
-    const next = extendedMembers[(currentIndex + 1 + len) % len];
-    return [prev, curr, next];
+  const variants = {
+    enter: (dir: "next" | "prev") => ({
+      x: dir === "next" ? 60 : -60,
+      opacity: 0,
+      scale: 0.98,
+    }),
+    center: { x: 0, opacity: 1, scale: 1 },
+    exit: (dir: "next" | "prev") => ({
+      x: dir === "next" ? -60 : 60,
+      opacity: 0,
+      scale: 0.98,
+    }),
   };
 
-  const visibleCards = getVisibleCards();
+  const current = teamMembers[index];
 
   return (
     <section className="bg-gray-50 py-16 overflow-hidden">
@@ -113,8 +115,15 @@ export default function TeamCarousel() {
           Nossa Equipe
         </h2>
 
-        <div className="relative">
-          {/* Navigation Arrows */}
+        <div
+          className="relative"
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="Nossa equipe"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          {/* Navegação */}
           <button
             onClick={handlePrev}
             className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white shadow-lg hover:bg-gray-50 transition-colors flex items-center justify-center"
@@ -134,73 +143,66 @@ export default function TeamCarousel() {
             </svg>
           </button>
 
-          {/* Cards Container */}
-          <div className="overflow-hidden mx-16">
-            <div 
-              className={`flex gap-6 ${isTransitioning ? 'transition-transform duration-500 ease-in-out' : ''}`}
-              style={{
-                transform: `translateX(calc(-33.333% - 0.5rem))`,
-              }}
-            >
-              {visibleCards.map((member, idx) => (
-                <div 
-                  key={`${currentIndex}-${idx}`}
-                  className={`flex-shrink-0 w-full md:w-[calc(33.333%-1rem)] transition-all duration-500 ${
-                    idx === 1 ? 'scale-100 opacity-100' : 'scale-90 opacity-60'
-                  }`}
+          {/* Card centralizado */}
+          <div className="mx-auto max-w-3xl px-2">
+            <div className="relative min-h-[540px] flex items-stretch justify-center">
+              <AnimatePresence custom={direction} mode="wait">
+                <motion.div
+                  key={index}
+                  custom={direction}
+                  variants={variants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{ duration: 0.45, ease: "easeOut" }}
+                  className="w-full"
                 >
                   <div className="bg-[#3e5f5b] rounded-3xl shadow-xl overflow-hidden h-full">
-                    {/* Header with name */}
                     <div className="text-center py-6 px-6">
-                      <h3 className="text-2xl font-semibold text-white">
-                        {member.name}
-                      </h3>
+                      <h3 className="text-2xl font-semibold text-white">{current.name}</h3>
                     </div>
 
-                    {/* Image */}
-                    <div className="relative w-full aspect-square max-w-[280px] mx-auto px-6">
+                    <div className="relative w-full aspect-square max-w-[320px] mx-auto px-6">
                       <div className="relative w-full h-full rounded-2xl overflow-hidden bg-white">
                         <Image
-                          src={member.image}
-                          alt={member.name}
+                          src={current.image}
+                          alt={current.name}
                           fill
                           className="object-cover"
-                          sizes="(max-width: 768px) 100vw, 280px"
+                          sizes="(max-width: 768px) 100vw, 320px"
                         />
                       </div>
                     </div>
 
-                    {/* Description */}
                     <div className="p-8 text-white space-y-4">
-                      {member.description.map((paragraph, index) => (
-                        <p key={index} className="text-sm leading-relaxed opacity-95">
-                          {paragraph}
-                        </p>
+                      {current.description.map((paragraph, idx) => (
+                        <p key={idx} className="text-sm leading-relaxed opacity-95">{paragraph}</p>
                       ))}
                     </div>
                   </div>
-                </div>
-              ))}
+                </motion.div>
+              </AnimatePresence>
             </div>
           </div>
 
-          {/* Dots indicator */}
-          <div className="flex justify-center gap-2 mt-8">
-            {teamMembers.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => {
-                  setIsTransitioning(true);
-                  setCurrentIndex(startIndex + index);
-                }}
-                className={`w-2.5 h-2.5 rounded-full transition-all ${
-                  (currentIndex - startIndex) % teamMembers.length === index
-                    ? "bg-[#3e5f5b] w-8"
-                    : "bg-gray-300 hover:bg-gray-400"
-                }`}
-                aria-label={`Ir para membro ${index + 1}`}
-              />
-            ))}
+          {/* Indicadores */}
+          <div className="flex justify-center gap-2 mt-8" role="tablist" aria-label="Membros da equipe">
+            {teamMembers.map((_, i) => {
+              const active = i === index;
+              return (
+                <button
+                  key={i}
+                  onClick={() => {
+                    setDirection(i > index ? "next" : "prev");
+                    setIndex(i);
+                  }}
+                  className={`h-2.5 rounded-full transition-all ${active ? "bg-[#3e5f5b] w-8" : "bg-gray-300 hover:bg-gray-400 w-2.5"}`}
+                  aria-label={`Ir para membro ${i + 1}`}
+                  role="tab"
+                  aria-selected={active}
+                />
+              );
+            })}
           </div>
         </div>
       </div>
