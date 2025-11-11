@@ -1,33 +1,19 @@
 import Image from "next/image";
-import Link from "next/link";
 import TeamCarousel from "@/components/TeamCarousel";
+import FAQ from "@/components/FAQ";
 import AnimatedSection from "@/components/AnimatedSection";
 import Footer from "@/components/Footer";
+import Header from "@/components/Header";
 
 export default function Home() {
   return (
     <div className="min-h-screen w-full">
       {/* Header */}
-      <header className="w-full sticky top-0 z-40 glass border-b border-black/5">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="#" className="flex items-center gap-2 select-none">
-            <Image src="/assets/logo.svg" alt="Instituto EVA" width={90} height={30} priority />
-          </Link>
-          <nav className="hidden sm:flex items-center gap-8 text-sm font-medium text-gray-700">
-            <a href="#agendamento" className="hover:text-black">Agendamento</a>
-            <Link href="/programas" className="hover:text-black">Programas</Link>
-            <a href="#contato" className="hover:text-black">Contato</a>
-          </nav>
-        </div>
-      </header>
+      <Header />
 
       {/* Hero */}
-      <section className="relative overflow-hidden">
-        {/* gradient blobs decorativos */}
-        <div className="gradient-blob left-[-10%] top-[-10%] w-[400px] h-[400px] rounded-full bg-[var(--eva-green-soft)]" />
-        <div className="gradient-blob right-[-10%] top-1/3 w-[420px] h-[420px] rounded-full bg-[var(--eva-green)] opacity-30" />
-
-        <div className="max-w-6xl mx-auto px-6 py-14 md:py-20 grid md:grid-cols-2 gap-10 items-center">
+      <section className="relative bg-white">
+        <div className="max-w-6xl mx-auto px-6 pt-14 md:pt-20 pb-0 grid md:grid-cols-2 gap-10 items-center">
           <AnimatedSection className="space-y-6" yOffset={28}>
             <h1 className="text-3xl md:text-4xl font-semibold text-gray-800 leading-snug">
               Somos especialistas em emagrecimento e tratamentos estéticos personalizados.
@@ -38,12 +24,11 @@ export default function Home() {
               </a>
             </div>
           </AnimatedSection>
-          <AnimatedSection className="relative flex justify-center md:justify-end" delay={0.1} yOffset={16}>
-            <Image src="/assets/doctor.svg" alt="Profissional de saúde" width={440} height={480} className="relative z-10 h-auto w-[320px] md:w-[420px] floating" />
+          <AnimatedSection className="relative flex justify-center md:justify-end md:translate-y-10 lg:translate-y-14" delay={0.1} yOffset={16}>
+            <Image src="/assets/doctor.svg" alt="Profissional de saúde" width={520} height={560} className="relative z-10 h-auto w-[340px] md:w-[460px]" />
           </AnimatedSection>
         </div>
-        {/* grande curva decorativa */}
-        <div className="pointer-events-none absolute -bottom-24 right-0 w-[70vw] h-[70vw] rounded-tl-[999px] bg-[var(--eva-green)]" />
+        {/* curva decorativa removida a pedido do cliente */}
       </section>
 
       {/* Serviços + Sobre */}
@@ -83,13 +68,16 @@ export default function Home() {
             </div>
 
             {/* Marca d'água de folha */}
-            <Image src="/assets/leaf-watermark.svg" alt="" aria-hidden width={400} height={400} className="pointer-events-none select-none absolute -right-8 bottom-0 opacity-20 hidden md:block" />
+            <Image src="/assets/backgroundLogo.svg" alt="" aria-hidden width={400} height={400} className="pointer-events-none select-none absolute -right-8 bottom-0 opacity-20 hidden md:block" />
           </AnimatedSection>
         </div>
       </section>
 
-      {/* Nossa Equipe */}
-      <TeamCarousel />
+  {/* Nossa Equipe */}
+  <TeamCarousel />
+
+  {/* Perguntas Frequentes */}
+  <FAQ />
 
       {/* Contato/CTA simples */}
       <section id="agendamento" className="bg-white">

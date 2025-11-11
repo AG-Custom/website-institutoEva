@@ -22,39 +22,34 @@ const teamMembers: TeamMember[] = [
     ]
   },
   {
-    name: "Dr André Luis",
-    title: "Médico Especializado",
-    image: "/doutorAndre.png",
+    name: "Isadora Figueiredo",
+    title: "Farmacêutica",
+    image: "/doutorAndre.png", // placeholder — substitua pela foto da Isadora quando disponível
     description: [
-      "O Dr. André Luis é médico especializado em Medicina do Esporte, com atuação voltada para o emagrecimento saudável, reeducação metabólica e melhora da performance física.",
-      "Com uma abordagem baseada em evidências científicas, o Dr. André combina estratégias médicas, nutricionais e de estilo de vida para produzir resultados consistentes e sustentáveis."
+      "Formada em farmácia pela Universidade Federal do Espírito Santo (UFES), Isadora atua com excelência na interface entre ciência e cuidado humano.",
+      "Com sólida experiência em terapias injetáveis, é responsável pela execução dos protocolos e pela segurança em cada procedimento realizado no Instituto Eva.",
+      "Sua presença constante na linha de frente do acompanhamento semanal dos pacientes reflete o compromisso do Instituto com uma medicina precisa, acolhedora e orientada a resultados.",
+      "Mais do que técnica, Isadora representa o olhar atento e humano que sustenta cada etapa do cuidado."
     ]
   },
   {
-    name: "Dr Jorge Luis",
-    title: "AAA Especializado",
-    image: "/doutorAndre.png",
+    name: "Erick Rosseto",
+    title: "Gestor Administrativo e Financeiro",
+    image: "/doutorAndre.png", // placeholder — substitua pela foto do Erick quando disponível
     description: [
-      "O Dr. André Luis é médico especializado em Medicina do Esporte, com atuação voltada para o emagrecimento saudável, reeducação metabólica e melhora da performance física.",
-      "Com uma abordagem baseada em evidências científicas, o Dr. André combina estratégias médicas, nutricionais e de estilo de vida para produzir resultados consistentes e sustentáveis."
+      "Formado em Gemologia pela Universidade Federal do Espírito Santo (UFES), Erick é o responsável pela gestão administrativa e financeira do Instituto Eva.",
+      "Com olhar atento, humano e proativo, cuida de cada detalhe do funcionamento da clínica, garantindo que a experiência do paciente seja impecável do início ao fim.",
+      "Além de coordenar processos internos, atua diretamente na gestão financeira dos protocolos, orientando métodos de pagamento e assegurando clareza e confiança em todas as etapas do atendimento.",
+      "Sua presença constante reflete o compromisso do Instituto Eva com excelência, transparência e cuidado em cada detalhe."
     ]
   },
   {
-    name: "Dr  Luis",
-    title: "Médico Especializado",
-    image: "/doutorAndre.png",
+    name: "Juliana Acerbi",
+    title: "Nutricionista",
+    image: "/doutorAndre.png", // placeholder — substitua pela foto da Juliana quando disponível
     description: [
-      "O Dr. André Luis é médico especializado em Medicina do Esporte, com atuação voltada para o emagrecimento saudável, reeducação metabólica e melhora da performance física.",
-      "Com uma abordagem baseada em evidências científicas, o Dr. André combina estratégias médicas, nutricionais e de estilo de vida para produzir resultados consistentes e sustentáveis."
-    ]
-  },
-  {
-    name: "Dr Lucas Luis",
-    title: "Médico Especializado",
-    image: "/doutorAndre.png",
-    description: [
-      "O Dr. André Luis é médico especializado em Medicina do Esporte, com atuação voltada para o emagrecimento saudável, reeducação metabólica e melhora da performance física.",
-      "Com uma abordagem baseada em evidências científicas, o Dr. André combina estratégias médicas, nutricionais e de estilo de vida para produzir resultados consistentes e sustentáveis."
+      "Juliana integra a equipe multidisciplinar do Instituto Eva com atuação voltada ao acompanhamento nutricional dentro dos protocolos de emagrecimento e saúde metabólica.",
+      "Com olhar técnico e sensibilidade humana, é responsável por alinhar estratégias alimentares aos objetivos clínicos de cada paciente, garantindo segurança, bem-estar e resultados sustentáveis."
     ]
   },
 ];
