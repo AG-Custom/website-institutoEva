@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="wl-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e8f4f8"/>
+      <stop offset="1" stop-color="#d0e8f0"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#wl-bg)"/>
+  <!-- Measuring tape -->
+  <path d="M200 200 Q400 150 600 200" stroke="#4a9fd8" stroke-width="40" fill="none"/>
+  <path d="M200 200 Q400 150 600 200" stroke="#ffffff" stroke-width="3" fill="none" stroke-dasharray="20,10"/>
+  <!-- Scale icon -->
+  <rect x="300" y="350" width="200" height="30" rx="15" fill="#5a6d7a"/>
+  <rect x="340" y="330" width="120" height="20" rx="3" fill="#3e5f5b"/>
+  <!-- Numbers -->
+  <text x="400" y="365" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="white" text-anchor="middle">75 kg</text>
+  <text x="400" y="500" font-family="Arial, sans-serif" font-size="42" font-weight="bold" fill="#3e5f5b" text-anchor="middle" opacity="0.4">EMAGRECIMENTO</text>
+</svg>

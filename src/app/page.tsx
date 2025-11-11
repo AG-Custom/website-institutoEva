@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import TeamCarousel from "@/components/TeamCarousel";
 
 export default function Home() {
   return (
@@ -12,7 +13,7 @@ export default function Home() {
           </Link>
           <nav className="hidden sm:flex items-center gap-8 text-sm font-medium text-gray-700">
             <a href="#agendamento" className="hover:text-black">Agendamento</a>
-            <a href="#tratamentos" className="hover:text-black">Tratamentos</a>
+            <Link href="/programas" className="hover:text-black">Programas</Link>
             <a href="#contato" className="hover:text-black">Contato</a>
           </nav>
         </div>
@@ -80,6 +81,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Nossa Equipe */}
+      <TeamCarousel />
 
       {/* Contato/CTA simples */}
       <section id="agendamento" className="bg-white">
