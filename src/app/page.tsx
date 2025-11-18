@@ -61,9 +61,9 @@ export default function Home() {
               <Image src="/assets/clinic.png" alt="Estrutura da clínica" width={540} height={320} className="rounded-xl w-full h-auto" />
             </div>
             <div className="relative z-10">
-              <h2 className="text-xl md:text-2xl font-semibold">A Clínica EVA nasceu com o propósito de transformar vidas por meio da saúde, da estética e do bem-estar.</h2>
+              <h2 className="text-xl md:text-2xl font-semibold">Sobre nós</h2>
               <p className="mt-5 text-white/90">
-                Unindo ciência, tecnologia e atendimento humanizado, oferecemos tratamentos personalizados nas áreas de emagrecimento, estética, longevidade e medicina esportiva.
+                A Clínica EVA nasceu com o propósito de transformar vidas por meio da saúde, da estética e do bem-estar. Unindo ciência, tecnologia e atendimento humanizado, oferecemos tratamentos personalizados nas áreas de emagrecimento, estética, longevidade e medicina esportiva.
               </p>
             </div>
 
