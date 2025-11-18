@@ -1,0 +1,46 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: directus_postgres
+    restart: always
+    environment:
+      POSTGRES_DB: directus
+      POSTGRES_USER: directus
+      POSTGRES_PASSWORD: directus123
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  directus:
+    image: directus/directus:latest
+    container_name: directus_app
+    restart: always
+    ports:
+      - "8055:8055"
+    depends_on:
+      - postgres
+    environment:
+      KEY: "uma_chave_secreta_bem_forte"
+      SECRET: "outra_chave_bem_forte"
+
+      # Admin inicial
+      ADMIN_EMAIL: "admin@admin.com"
+      ADMIN_PASSWORD: "admin123"
+
+      # Conexão com o PostgreSQL
+      DB_CLIENT: "postgres"
+      DB_HOST: "postgres"
+      DB_PORT: "5432"
+      DB_DATABASE: "directus"
+      DB_USER: "directus"
+      DB_PASSWORD: "directus123"
+
+    volumes:
+      - directus_uploads:/directus/uploads
+
+volumes:
+  postgres_data:
+  directus_uploads:
